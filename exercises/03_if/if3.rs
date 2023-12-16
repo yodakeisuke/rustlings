@@ -2,18 +2,18 @@
 //
 // Execute `rustlings hint if3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
-pub fn animal_habitat(animal: &str) -> &'static str {
+pub fn animal_habitat(animal: &str) -> &'static str{
     let identifier = if animal == "crab" {
         1
     } else if animal == "gopher" {
-        2.0
+        2
     } else if animal == "snake" {
         3
     } else {
-        "Unknown"
+        0
     };
+    // if式 が値を返せるが、ifで返す値の型は必ず同じ必要がある。
+    // 複数の型を返す可能性がある場合は、ユニオンタイプ的なものをenumで定義。
 
     // DO NOT CHANGE THIS STATEMENT BELOW
     let habitat = if identifier == 1 {
