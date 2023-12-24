@@ -3,8 +3,6 @@
 // Execute `rustlings hint move_semantics1` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
-
 #[test]
 fn main() {
     let vec0 = vec![22, 44, 66];
@@ -15,9 +13,5 @@ fn main() {
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
-    let vec = vec;
-
-    vec.push(88);
-
-    vec
+    vec.into_iter().chain(std::iter::once(88)).collect() // 88の1回のみのイテレータをchain
 }

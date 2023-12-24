@@ -20,8 +20,6 @@
 //
 // No hints this time!
 
-// I AM NOT DONE
-
 pub enum Command {
     Uppercase,
     Trim,
@@ -30,13 +28,19 @@ pub enum Command {
 
 mod my_module {
     use super::Command;
+    // pub use self::transformer as process;
 
     // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+        let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
+            match command {
+                Command::Uppercase => output.push(string.to_uppercase()),
+                Command::Trim => output.push(string.trim().to_string()),
+                Command::Append(n) => output.push(string.to_string() + &"bar".repeat(*n)),
+            }
         }
         output
     }
@@ -45,8 +49,8 @@ mod my_module {
 #[cfg(test)]
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
-    use ???;
-    use super::Command;
+    use crate::my_module::transformer; // crate始まりは絶対パスでの指定。
+    use super::Command;                // super::（親モジュールを参照）や self::（現在のモジュールを参照）は相対パスでの指定。
 
     #[test]
     fn it_works() {
