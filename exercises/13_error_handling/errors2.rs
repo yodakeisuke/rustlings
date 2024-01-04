@@ -19,16 +19,23 @@
 // Execute `rustlings hint errors2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
+    item_quantity.parse::<i32>()
+        .and_then(|qty|  Ok(qty * cost_per_item + processing_fee))
+        .or_else(|e| Err(e))
 
-    Ok(qty * cost_per_item + processing_fee)
+    // let qty = item_quantity.parse::<i32>()?;
+    // Ok(qty * cost_per_item + processing_fee)
+    // こっちの方が短いがエラー時に起こることが暗黙的になっていて上の方が好み。おそらく一般的にはこちらを使うし慣れれば非冗長なのでいいのだろう
+    // `?`の糖衣を剥がすと以下のようなイメージ
+    // let qty = match item_quantity.parse::<i32>() {
+    //     Ok(qty) => qty,  // 成功した場合は値を取り出す
+    //     Err(e) => return Err(e),  // エラーが発生した場合は早期リターン
+    // };
 }
 
 #[cfg(test)]

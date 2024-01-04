@@ -9,14 +9,11 @@
 // Execute `rustlings hint errors1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
-pub fn generate_nametag_text(name: String) -> Option<String> {
+pub fn generate_nametag_text(name: String) -> Result<String, String> {
     if name.is_empty() {
-        // Empty names aren't allowed.
-        None
+        Err("`name` was empty; it must be nonempty.".into())
     } else {
-        Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 
@@ -41,3 +38,7 @@ mod tests {
         );
     }
 }
+
+// なぜ "some string".into()がString型になるのか？
+// 1. From<&str> が String 型に対して実装されている
+// 2. その上で、特に状況の指定がない場合、コンパイラは`String`が一般的に妥当だろうと「みなし」てStringに変換する。（選択肢がStringしかないから、ではない）
